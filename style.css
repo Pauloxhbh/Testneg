@@ -619,7 +619,7 @@ img {
 }
 
 /* ================================
-   MODAL
+   MODAL (CORRIGIDO)
    ================================ */
 .modal {
     position: fixed;
@@ -650,8 +650,6 @@ img {
     background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(10px);
 }
-
-/* ===== INÍCIO DA CORREÇÃO ===== */
 
 .modal-content {
     position: relative;
@@ -786,8 +784,6 @@ img {
     z-index: 3; 
 }
 
-/* ===== FIM DA CORREÇÃO ===== */
-
 .toggle-option {
     padding: 12px 30px;
     border-radius: 50px;
@@ -866,9 +862,52 @@ img {
         right: 0;
     }
 
+    /* ===== INÍCIO DA CORREÇÃO DO SCROLL HORIZONTAL ===== */
+
     .projetos-grid {
-        grid-template-columns: 1fr;
+        display: flex; /* Transforma em um container flexível */
+        overflow-x: auto; /* Habilita o scroll horizontal */
+        gap: 20px; /* Espaçamento entre os cards */
+        
+        /* Remove a regra de grid que existia */
+        grid-template-columns: none; 
+
+        /* Opcional: Adiciona "snap" ao scroll (efeito carrossel) */
+        scroll-snap-type: x mandatory;
+
+        /* Garante espaço para o snap e para a sombra do card */
+        padding-bottom: 20px; 
+        
+        /* Oculta a barra de scroll visualmente */
+        -ms-overflow-style: none;  /* IE e Edge */
+        scrollbar-width: none;  /* Firefox */
     }
+
+    /* Oculta a barra de scroll para Chrome, Safari */
+    .projetos-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Adicione esta nova regra para os cards */
+    .projetos-grid .projeto-card {
+        flex-shrink: 0; /* Impede que os cards encolham */
+        
+        /* * Define a largura do card. 
+         * 85vw = 85% da largura da tela. 
+         * Isso faz com que um card ocupe a tela e mostre um pedaço do próximo, 
+         * convidando o usuário a rolar. Ajuste se quiser.
+        */
+        width: 85vw; 
+        
+        /* Alinha os cards para o "snap" */
+        scroll-snap-align: start;
+
+        /* Reseta o delay da animação de fade-in (que era para o grid) */
+        animation-delay: 0s !important; 
+    }
+    
+    /* ===== FIM DA CORREÇÃO DO SCROLL HORIZONTAL ===== */
+
 
     .sobre-content,
     .contato-content {
@@ -944,4 +983,4 @@ img {
 
 .projeto-image.loaded {
     filter: blur(0);
-       }
+   }
