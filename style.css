@@ -730,20 +730,25 @@ img {
     max-height: 70vh;
     margin: 0 auto;
 }
-
 .modal-image {
     width: 100%;
     height: auto;
     border-radius: 10px;
     object-fit: contain;
     transition: opacity 0.3s ease;
+    z-index: 0; 
+    position: relative; /* Necessário para z-index funcionar */
 }
 
 .modal-controls {
     display: flex;
     justify-content: center;
     padding: 10px;
+    position: relative; /* Necessário para z-index funcionar */
+    z-index: 2; /* Defina um valor maior que o z-index da imagem */
+    margin-top: -30px; /* Ajuste se necessário para sobrepor um pouco a imagem */
 }
+
 
 .toggle-btn {
     display: flex;
@@ -753,6 +758,8 @@ img {
     border: none;
     cursor: pointer;
     gap: 5px;
+    position: relative; 
+    z-index: 3; 
 }
 
 .toggle-option {
